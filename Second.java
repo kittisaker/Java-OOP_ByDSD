@@ -3,8 +3,6 @@ public class Second {
 
         // Obj 1
         MyClass obj1 = new MyClass(20);
-        System.out.println(obj1.age);
-        obj1.age = 34;
         obj1.getAge();
 
         // Obj2
