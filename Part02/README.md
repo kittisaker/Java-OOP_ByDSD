@@ -113,10 +113,7 @@ public class Main{
 }
 ```
 
-## Constructor Parameters
-```
-- Constructors can also take parameters, which is used to initialize attributes.
-```
+### labs
 
 ```
 # MyClass.java
@@ -157,9 +154,4 @@ public class Second {
         obj2.getAge();
     }
 }
-```
-
-### Constructor Parameters with Overload
-```
-pass
 ```
