@@ -94,3 +94,74 @@ public class MyClass{
     - Built-in Packages (packages from the Java API)
     - User-defined Packages (create your own packages)
 ```
+
+### Built-in Packages
+```
+Learn more
+```
+
+## Import
+```
+# Syntax
+import package.name.Class;  // Import a single class
+import package.name.*;  // Import a whole class
+
+# Example
+import java.util.List;
+import java.util.*;
+```
+
+<details>
+<summary>Example</summary>
+
+```
+import java.util.ArrayList;
+public class Second {
+    public static void main(String[] args){
+
+        // Obj 1
+        MyClass obj1 = new MyClass(20);
+        obj1.getAge();
+
+        // Obj2
+        MyClass obj2 = new MyClass(46);
+        obj2.getAge();
+
+        // Obj3
+        MyClass obj3 = new MyClass(24, "John");
+        obj3.getAge();
+
+        ArrayList<MyClass> ls = new ArrayList<>();
+        ls.add(obj1);
+        ls.add(obj2);
+        ls.add(obj3);
+        ls.size();
+    }
+}
+```
+
+</details>
+
+## User-defined Packages
+
+```
+# Ex
+package mypack;
+class MyPackageClass{
+    public static void main(String[] args){
+        System.out.println("This is my package!);
+}
+```
+
+```
+Create Folder and Move file
+and Test 
+Application.java
+package th.go.dsd.app;
+
+public class Application {
+    public static void main(String[] args){
+        System.out.println("Hello world!!");
+    }
+}
+```

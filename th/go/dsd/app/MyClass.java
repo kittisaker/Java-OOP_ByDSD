@@ -1,3 +1,4 @@
+package th.go.dsd.app;
 public class MyClass{
 
     private int age = 18;
