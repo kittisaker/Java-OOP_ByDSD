@@ -1,5 +1,13 @@
 public class MyClass{
 
+    MyClass(){
+        
+    }
+
+    MyClass(int age, String name){
+        
+    }
+
     MyClass(int age){
         System.out.println("This is constructor");
         this.age = age;
