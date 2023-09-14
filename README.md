@@ -203,20 +203,25 @@ public class Second {
 </details>
 
 ## User-defined Packages
+Ex.
+- root
+   - th
+      - go
+         - dsd
+            - app
+               - Application.java
 <details>
-<summary>x.java</summary>
+<summary>Application.java</summary>
 
 ```
+package th.go.dsd.app;
 
+public class Application {
+    public static void main(String[] args) {
+        System.out.println("Hello");
+    }
+}
 ```
 </details>
 
-## 
-<details>
-<summary>x.java</summary>
-
-```
-
-```
-</details>
 ---
