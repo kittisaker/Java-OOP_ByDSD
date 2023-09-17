@@ -11,12 +11,20 @@ public class Car extends Vehicle {
         this.modelName = modelName;
     }
 
-    public String brand() {             // <--
+    public String brand() {           
         return this.brand;
     }
 
     public void honk(){
         super.honk();
         System.out.println("Beep Beep !!");
+    }
+
+    public String getInfo(){        // <--
+        return this.modelName;
+    }
+
+    public String sayHi(){
+        return "Hello";
     }
 }
