@@ -7,6 +7,7 @@ import th.go.dsd.util.AppRunner;
 import th.go.dsd.util.Calc;
 import th.go.dsd.util.CallParam;
 import th.go.dsd.util.CallResponse;
+import th.go.dsd.util.Echo;
 
 public class Application {
 
@@ -14,9 +15,9 @@ public class Application {
         CallParam cmd1 = new CallParam(args);
         Map<String, AppRunner> feature = new HashMap<>();
         feature.put("calc", new Calc());
+        feature.put("echo", new Echo());
 
         if(feature.containsKey(cmd1.getCommand())){
-            // logic here
             AppRunner cmd = feature.get(cmd1.getCommand());
             CallResponse resp = cmd.runCommand(cmd1);
             System.out.println(resp.getValue());

@@ -100,7 +100,7 @@ public class Application {
 </details>
 
 
-## Workshow GLC(Command Line Interface)
+## Workshow CLI(Command Line Interface)
 ```
 > java th.go.dst.app.Application calc sum 1 2 4 5 6
 ```
@@ -114,17 +114,17 @@ public class Application {
 Case test
 ```
 Case 1
->java th.go.dst.app.Application calc add 1 2
+> java th.go.dst.app.Application calc add 1 2
 output : Value = 3
 
 Case 2
->java th.go.dst.app.Application calc sum 1 2 3 4 5 6
+> java th.go.dst.app.Application calc sum 1 2 3 4 5 6
 output : Value = 18
 ```
 
 ### Step 1
 
-* Solution
+* Create CallParam class.
 ```
 class CallParam {
     private String command;
@@ -211,6 +211,8 @@ public class Application {
 
 ### Step 2
 
+* Create CallResponse class
+
 ```
 class CallResponse{
     String value;
@@ -238,6 +240,9 @@ public class CallResponse {
 }
 ```
 </details>
+</br>
+
+* Create AppRunner abstract class
 
 ```
 public abstract class AppRunner{
@@ -259,6 +264,7 @@ public abstract class AppRunner {
 
 ## Step 3
 
+* Create Calc class
 <details>
 <summary>Calc.java</summary>
 
@@ -268,7 +274,7 @@ package th.go.dsd.util;
 import java.util.ArrayList;
 
 public class Calc extends AppRunner{
-    public int add(int a, int b){
+    public int add(int a, int b){   // You can change public to private
         return a + b;
     }
 
@@ -288,8 +294,8 @@ public class Calc extends AppRunner{
                 if(param.getOption() != null){
                     String[] opts = param.getOption();
                     int len = opts.length;
-                    int a = len > 0 ? a = Integer.parseInt(opts[0]) : 0;
-                    int b = len > 1 ? b = Integer.parseInt(opts[1]) : 0;
+                    int a = len > 0 ? Integer.parseInt(opts[0]) : 0;
+                    int b = len > 1 ? Integer.parseInt(opts[1]) : 0;
                     int c = add(a, b);
                     resp.setValue("Value = " + c);
                 }
@@ -340,15 +346,94 @@ public class Application {
 ```
 </details>
 
+```
+> javac th/go/dsd/app/Application.java
 
----
-##
+> java th.go.dsd.app.Application calc add 1 2 
+Value = 3
 
-<details>
-<summary>.java</summary>
-
+> java th.go.dsd.app.Application calc sum 1 2 
+Not implement
 ```
 
+### Step 4
+```
+Case 2
+>java th.go.dst.app.Application calc sum 1 2 3 4 5 6
+output : Value = 18
+
+Case 3
+>java th.go.dst.app.Application echo say Jame
+output : Hello Jame
+```
+
+<details>
+<summary>Echo.java</summary>
+
+```
+package th.go.dsd.util;
+
+public class Echo extends AppRunner{
+    public String say(String arg){
+        return arg;
+    }
+
+    @Override
+    public CallResponse runCommand(CallParam param) {
+        CallResponse resp = new CallResponse();
+        // logic
+        switch(param.getSubCommand()){
+            case "say" :
+                if(param.getOption() != null){
+                    String[] opts = param.getOption();
+                    String result = "";
+                    for(String o : opts){
+                        result += say(o).concat(" ");
+                    }
+                    resp.setValue("Hello " + result);
+                }
+                break;
+            default :
+                break;
+        }
+        return resp;
+    }
+}
+```
+</details>
+
+<details>
+<summary>Application.java</summary>
+
+```
+package th.go.dsd.app;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import th.go.dsd.util.AppRunner;
+import th.go.dsd.util.Calc;
+import th.go.dsd.util.CallParam;
+import th.go.dsd.util.CallResponse;
+import th.go.dsd.util.Echo;
+
+public class Application {
+
+    public static void main(String[] args) {
+        CallParam cmd1 = new CallParam(args);
+        Map<String, AppRunner> feature = new HashMap<>();
+        feature.put("calc", new Calc());
+        feature.put("echo", new Echo());
+
+        if(feature.containsKey(cmd1.getCommand())){
+            AppRunner cmd = feature.get(cmd1.getCommand());
+            CallResponse resp = cmd.runCommand(cmd1);
+            System.out.println(resp.getValue());
+        }else{
+            System.out.println("Not support this command " + cmd1.getCommand());
+        }
+    }
+}
 ```
 </details>
 

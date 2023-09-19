@@ -3,7 +3,7 @@ package th.go.dsd.util;
 import java.util.ArrayList;
 
 public class Calc extends AppRunner{
-    public int add(int a, int b){
+    public int add(int a, int b){   // You can change public to private
         return a + b;
     }
 
@@ -23,8 +23,8 @@ public class Calc extends AppRunner{
                 if(param.getOption() != null){
                     String[] opts = param.getOption();
                     int len = opts.length;
-                    int a = len > 0 ? a = Integer.parseInt(opts[0]) : 0;
-                    int b = len > 1 ? b = Integer.parseInt(opts[1]) : 0;
+                    int a = len > 0 ? Integer.parseInt(opts[0]) : 0;
+                    int b = len > 1 ? Integer.parseInt(opts[1]) : 0;
                     int c = add(a, b);
                     resp.setValue("Value = " + c);
                 }
@@ -33,7 +33,7 @@ public class Calc extends AppRunner{
                     resp.setValue("Not implement");
                 break;
             default:
-            break;
+                break;
         }
         return resp;
     }
