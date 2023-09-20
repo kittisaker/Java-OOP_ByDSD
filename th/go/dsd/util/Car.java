@@ -1,6 +1,6 @@
 package th.go.dsd.util;
 
-public class Car extends Vehicle {
+public class Car extends Vehicle implements AppRunner{
     private String modelName = "Mustang";
 
     public String getModelName() {
@@ -26,5 +26,18 @@ public class Car extends Vehicle {
 
     public String sayHi(){
         return "Hello";
+    }
+
+    @Override
+    public CallResponse runCommand(CallParam param) {
+        CallResponse resp = new CallResponse();     // <-- 
+        switch(param.getSubCommand()){
+            case "info" :
+                resp.setValue(getInfo());
+                break;
+            default :
+                break;
+        }
+        return resp;
     }
 }

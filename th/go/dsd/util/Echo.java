@@ -1,14 +1,13 @@
 package th.go.dsd.util;
 
-public class Echo extends AppRunner{
+public class Echo implements AppRunner{            // <-- original : public class Echo extends AppRunner{
     public String say(String arg){
         return arg;
     }
 
-    @Override
+    @Override               // <-- Error with : public class Echo extends AppRunner{
     public CallResponse runCommand(CallParam param) {
         CallResponse resp = new CallResponse();
-        // logic
         switch(param.getSubCommand()){
             case "say" :
                 if(param.getOption() != null){

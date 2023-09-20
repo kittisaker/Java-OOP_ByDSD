@@ -2,8 +2,8 @@ package th.go.dsd.util;
 
 import java.util.ArrayList;
 
-public class Calc extends AppRunner{
-    public int add(int a, int b){   // You can change public to private
+public class Calc implements AppRunner{    // <-- original : public class Calc extends AppRunner{
+    public int add(int a, int b){   
         return a + b;
     }
 
@@ -15,8 +15,8 @@ public class Calc extends AppRunner{
         return sum;
     }
 
-    @Override
-    public CallResponse runCommand(CallParam param) {
+    @Override // <-- Error with : original : public class Calc extends AppRunner{
+    public CallResponse runCommand(CallParam param) {       
         CallResponse resp = new CallResponse();
         switch(param.getSubCommand()){
             case "add" :
