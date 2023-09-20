@@ -59,7 +59,7 @@ public class Echo implements AppRunner{            // <-- original : public clas
 <details>
 <summary>Calc.java</summary>
 
-```
+```java
 package th.go.dsd.util;
 
 import java.util.ArrayList;
