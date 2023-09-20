@@ -10,7 +10,7 @@
 <details>
 <summary>AppRunner.java</summary>
 
-```
+```java
 package th.go.dsd.util;
 
 // public abstract class AppRunner {
@@ -25,7 +25,7 @@ public interface AppRunner {                            // < -- Interface
 <details>
 <summary>Echo.java</summary>
 
-```
+```java
 package th.go.dsd.util;
 
 public class Echo implements AppRunner{            // <-- original : public class Echo extends AppRunner{
