@@ -127,7 +127,7 @@ public class Application {
 ```
 </details>
 
-test
+* test
 
 <details>
 <summary>Application.java</summary>
