@@ -9,7 +9,7 @@
 <details>
 <summary>Main.java</summary>
 
-```
+```java
 public class Main{  // <--
     int x = 5;
 }
@@ -27,7 +27,7 @@ public class Main{  // <--
 <details>
 <summary>MyClass.java</summary>
 
-```
+```java
 class MyClass{
     int age = 18;
     void getAge(){
@@ -51,7 +51,7 @@ class MyClass{
 <details>
 <summary>MyClass.java</summary>
 
-```
+```java
 class MyClass{
     int age = 18;
     void getAge(){
@@ -64,7 +64,7 @@ class MyClass{
 <details>
 <summary>Second.java</summary>
 
-```
+```java
 public class Second {
     public static void main(String[] args){
         MyClass obj = new MyClass();
@@ -86,7 +86,7 @@ public class Second {
 <details>
 <summary>Main.java</summary>
 
-```
+```java
 class Main{
     int x = 5;  // <--
     int y = 3;  // <--
@@ -99,7 +99,7 @@ class Main{
 <details>
 <summary>Main.java</summary>
 
-```
+```java
 class Main{
     void myMethod(){                        // <--
         System.out.println("Hello World!");
@@ -113,7 +113,7 @@ class Main{
 <details>
 <summary>MyClass.java</summary>
 
-```
+```java
 class MyClass{
 
     MyClass(){                                      // <--
@@ -126,7 +126,7 @@ class MyClass{
 <details>
 <summary>Second.java</summary>
 
-```
+```java
 public class Second {
     public static void main(String[] args){
         MyClass obj = new MyClass();
