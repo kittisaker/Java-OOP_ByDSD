@@ -1,7 +1,6 @@
 package th.go.dsd.util;
 
-public class Truck extends Vehicle{
-    // @Override is inotation
+public class Truck extends Vehicle implements AppRunner{
     @Override
     public String getInfo() {
         return "Hino";
@@ -11,5 +10,17 @@ public class Truck extends Vehicle{
     public String sayHi() {
         return "Hi from my truck";
     }
-    
+
+    @Override
+    public CallResponse runCommand(CallParam param) {
+        CallResponse resp = new CallResponse(); // <-- 
+        switch(param.getSubCommand()){
+            case "info" :
+                resp.setValue(getInfo());
+                break;
+            default :
+                break;
+        }
+        return resp;
+    }
 }
