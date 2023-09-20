@@ -6,7 +6,7 @@
 <details>
 <summary>MyClass.java</summary>
 
-```
+```java
 public class MyClass{                    // <--
 
     MyClass(int age){
@@ -27,7 +27,7 @@ public class MyClass{                    // <--
 <details>
 <summary>Second.java</summary>
 
-```
+```java
 public class Second {
     public static void main(String[] args){
         MyClass obj = new MyClass(20);
@@ -169,7 +169,7 @@ public class Second {
 <details>
 <summary>MyClass.java</summary>
 
-```
+```java
 public class MyClass{
 
     private int age = 18;
@@ -189,7 +189,7 @@ public class MyClass{
 <details>
 <summary>Second.java</summary>
 
-```
+```java
 public class Second {
     public static void main(String[] args){
         MyClass obj = new MyClass(20);
@@ -213,7 +213,7 @@ Ex.
 <details>
 <summary>Application.java</summary>
 
-```
+```java
 package th.go.dsd.app;
 
 public class Application {
