@@ -1,119 +1,180 @@
-# OOP : Chapter 6
+# OOP : Chapter 7
 
-## Interfaces #2
-* Like abstract classes, interfaces cannot be used to create objects
-* Interface methods do <b>not have a body</b> - the body is provided by the "implement" class
-* On implementation of an interface, you must override all its methods
-* Interface methods are by default abstract and public
-* Interface attributes are by default public, static and final
-* An interface cannot contain a constructor (as it cannot be used to create objects)
+## User Input
+* The Scanner class is used to get user input, and it is found in the java.uil package.
 
-* Example
+<table>
+  <tr>
+    <th>Mathod</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>nextBoolean()</td>
+    <td>Reads a boolean value from the user</td>
+  </tr>
+  <tr>
+    <td>nextByte()</td>
+    <td>Reads a byte value from the user</td>
+  </tr>
+  <tr>
+    <td>nextDouble()</td>
+    <td>Reads a double value from the user</td>
+  </tr>
+  <tr>
+    <td>nextFloat()</td>
+    <td>Reads a float value from the user</td>
+  </tr>
+  <tr>
+    <td>nextInt()</td>
+    <td>Reads a int value from the user</td>
+  </tr>
+  <tr>
+    <td>nextString()</td>
+    <td>Reads a string value from the user</td>
+  </tr>
+  <tr>
+    <td>nextLong()</td>
+    <td>Reads a long value from the user</td>
+  </tr>
+  <tr>
+    <td>nextShort()</td>
+    <td>Reads a short value from the user</td>
+  </tr>
+</table>
 
-<details>
-<summary>Aninal.java (interface)</summary>
-
-```java
-interface Animal{
-    public void animalSound();
-    public void sleep();
-}
-```
-</details>
-
-<details>
-<summary>Pig.java</summary>
-
-```java
-cladd Pig implements Animal{
-    public void animalSound(){
-        System.out.println("The pig says : wee wee");
-    }
-    public void sleep(){
-        System.out.println("Zzz");
-    }
-}
-```
-</details>
-
-## Interfaces #3
-
-* Example
-
-<details>
-<summary>FirstInterface.java (interface)</summary>
-
-```java
-interface FirstInterface{
-    public void myMethod();
-}
-```
-</details>
+---
 
 <details>
-<summary>SecondInterface.java (interface)</summary>
+<summary>.java</summary>
 
 ```java
-interface SecondInterface{
-    public void myOtherMethod();
-}
+package th.go.dsd.util;
 
-```
-</details>
+import java.util.Scanner;
 
-<details>
-<summary>DemoClass.java (implements)</summary>
+public class MyInput {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Please input name : ");
+        String name = sc.nextLine();
 
-```java
-class DevoClass implements FirstInterface, SecondInterface{
-    public void myMethod(){
-        System.out.println("Some text...");
-    }
-    public void myOtherMethod(){
-        System.out.println("Some other text...");
+        System.out.print("Please input age : ");
+        int age = sc.nextInt();
+
+        sc.close();
+
+        System.out.println("\nName : " + name + "\nAge : " + age);
     }
 }
 ```
 </details>
 
-## Emums
-* An enum is a special "class" that respresents a group of constants (unchangeable variables, like final variables).
-* To create an enum, use the enum keyword (instead of class or interface), and separate the constants with a comma.
-* Note that they should be in uppercase letters.
-</br>
-* Example
+## Workshop
+
 ```
-enum Level{
-    LOW,
-    MEDIUM,
-    HIGH
+// Case
+> java th.go.dsd.app.Aplication myinput info
+Output : 
+Your Name :
+Age :
+Hello --, age = xx
+```
+
+<details>
+<summary>MyInput.java (class MyInput implements AppRunner)</summary>
+
+```java
+package th.go.dsd.util;
+
+import java.util.Scanner;
+
+public class MyInput implements AppRunner {
+    private String name;
+    private int age;
+    private String info;
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    @Override
+    public CallResponse runCommand(CallParam param) {
+        CallResponse resp = new CallResponse();
+        switch(param.getSubCommand()){
+            case "info":
+                Scanner sc = new Scanner(System.in);
+                System.out.print("Please input name : ");
+                this.setName(sc.nextLine());
+
+                System.out.print("Please input age : ");
+                this.setAge(sc.nextInt());
+
+                this.setInfo("Hello " + name + ", age = " + age);
+                resp.setValue(getInfo());
+
+                sc.close();
+                break;
+            default :
+                System.out.println("Not Support");
+                break;
+        }return resp;
+    }
 }
 ```
+</details>
 
-## Enum inside a Class
-
-* Example
 <details>
-<summary>Main.java</summary>
+<summary>Application.java</summary>
 
 ```java
 package th.go.dsd.app;
 
-public class Main {
-    enum Level{
-        LOW,
-        MEDIUM,
-        HEIGHT
-    }
-    enum Status{
-        ACTIVE,
-        INACTIVE
-    }
-    public static void main(String[] args) {
-        Status s = Status.ACTIVE;
+import java.util.HashMap;
+import java.util.Map;
 
-        if(s == Status.ACTIVE){
-            System.out.println(s);
+import th.go.dsd.util.AppRunner;
+import th.go.dsd.util.Calc;
+import th.go.dsd.util.CallParam;
+import th.go.dsd.util.CallResponse;
+import th.go.dsd.util.Car;
+import th.go.dsd.util.Echo;
+import th.go.dsd.util.MyInput;
+import th.go.dsd.util.Truck;
+
+public class Application {
+
+    public static void main(String[] args) {
+        CallParam cmd1 = new CallParam(args);
+        Map<String, AppRunner> feature = new HashMap<>();
+        feature.put("calc", new Calc());
+        feature.put("echo", new Echo());
+        feature.put("car", new Car());
+        feature.put("truck", new Truck());
+        feature.put("myinput", new MyInput());
+
+        if(feature.containsKey(cmd1.getCommand())){
+            AppRunner cmd = feature.get(cmd1.getCommand());
+            CallResponse resp = cmd.runCommand(cmd1);
+            System.out.println(resp.getValue());
+        }else{
+            System.out.println("Not support this command " + cmd1.getCommand());
         }
     }
 }
@@ -121,4 +182,3 @@ public class Main {
 </details>
 
 ---
-
