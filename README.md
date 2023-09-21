@@ -8,8 +8,6 @@
 * Interface attributes are by default public, static and final
 * An interface cannot contain a constructor (as it cannot be used to create objects)
 
-## Interfaces #3
-
 * Example
 
 <details>
