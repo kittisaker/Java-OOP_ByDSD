@@ -1,48 +1,60 @@
-# OOP : Chapter 7
+# OOP : Chapter 8
 
-## User Input
-* The Scanner class is used to get user input, and it is found in the java.uil package.
+## Date and Time
+* Java does not have a built-in Date class, but we can import the java.time/ java.util package to work with the date and time API.
+* The package includes many date and time classes.
 
 <table>
   <tr>
-    <th>Mathod</th>
+    <th>Class</th>
     <th>Description</th>
   </tr>
   <tr>
-    <td>nextBoolean()</td>
-    <td>Reads a boolean value from the user</td>
+    <td>LocalDate</td>
+    <td>Represents a date (year, month, day (yyyy-MM-dd))</td>
   </tr>
   <tr>
-    <td>nextByte()</td>
-    <td>Reads a byte value from the user</td>
+    <td>LocalTime</td>
+    <td>Represents a time (hour, minute, second and nanoseconds (HH-mm-ss-ns)</td>
   </tr>
   <tr>
-    <td>nextDouble()</td>
-    <td>Reads a double value from the user</td>
+    <td>LocalDateTime</td>
+    <td>Represents both a date and a time (yyyy-MM-dd-HH-mm-ss-ns)</td>
   </tr>
   <tr>
-    <td>nextFloat()</td>
-    <td>Reads a float value from the user</td>
-  </tr>
-  <tr>
-    <td>nextInt()</td>
-    <td>Reads a int value from the user</td>
-  </tr>
-  <tr>
-    <td>nextString()</td>
-    <td>Reads a string value from the user</td>
-  </tr>
-  <tr>
-    <td>nextLong()</td>
-    <td>Reads a long value from the user</td>
-  </tr>
-  <tr>
-    <td>nextShort()</td>
-    <td>Reads a short value from the user</td>
+    <td>DateTimeFormatter</td>
+    <td>Formatter for displaying and parsing date-ime objects</td>
   </tr>
 </table>
 
----
+
+<details>
+<summary>MyDateTime.java</summary>
+
+```java
+package th.go.dsd.util;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class MyDateTime {
+    public static void main(String[] args) {
+        LocalDateTime myDateObj = LocalDateTime.now(); // .now() : public static
+        System.out.println("Before format = " + myDateObj);
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dateWithFormat = myDateObj.format(dtf);
+        System.out.println(dateWithFormat);
+    }
+}
+```
+</details>
+
+## ArrayList
+* The ArrayList class is a resizablearray, which can be found in the java.utill package.
+* The difference between a built-in array and an ArrayList in Java, is that the size of an array cannot be modified (if you want to add or remove elements to/from an array, you have to create a new one).
+* Shile elements can be added and removed from an ArrayList whenever you want.
+* The syntax is also slightly different.
 
 <details>
 <summary>.java</summary>
@@ -50,135 +62,31 @@
 ```java
 package th.go.dsd.util;
 
-import java.util.Scanner;
+import java.util.ArrayList;
 
-public class MyInput {
+public class MyList {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Please input name : ");
-        String name = sc.nextLine();
+        ArrayList<String> cars = new ArrayList<>();
+        cars.add("Ford");
+        System.out.println(cars.size()); // 1
+        System.out.println(cars.get(0)); // Ford
+        cars.set(0, "Volvo");
+        System.out.println(cars.get(0)); // Volvo
+        cars.add("Toyota");
+        System.out.println(cars.size()); // 2
+        cars.add("Honda");
+        cars.remove(1);
+        System.out.println(cars.size()); // 2
+        System.out.println(cars.get(1)); // Honda
+        cars.clear(); // Clear
 
-        System.out.print("Please input age : ");
-        int age = sc.nextInt();
+        System.out.println(cars.get(0));
+        System.out.println(cars.get(1));
 
-        sc.close();
-
-        System.out.println("\nName : " + name + "\nAge : " + age);
     }
 }
 ```
 </details>
 
-## Workshop
-
-```
-// Case
-> java th.go.dsd.app.Aplication myinput info
-Output : 
-Your Name :
-Age :
-Hello --, age = xx
-```
-
-<details>
-<summary>MyInput.java (class MyInput implements AppRunner)</summary>
-
-```java
-package th.go.dsd.util;
-
-import java.util.Scanner;
-
-public class MyInput implements AppRunner {
-    private String name;
-    private int age;
-    private String info;
-
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
-    @Override
-    public CallResponse runCommand(CallParam param) {
-        CallResponse resp = new CallResponse();
-        switch(param.getSubCommand()){
-            case "info":
-                Scanner sc = new Scanner(System.in);
-                System.out.print("Please input name : ");
-                this.setName(sc.nextLine());
-
-                System.out.print("Please input age : ");
-                this.setAge(sc.nextInt());
-
-                this.setInfo("Hello " + name + ", age = " + age);
-                resp.setValue(getInfo());
-
-                sc.close();
-                break;
-            default :
-                System.out.println("Not Support");
-                break;
-        }return resp;
-    }
-}
-```
-</details>
-
-<details>
-<summary>Application.java</summary>
-
-```java
-package th.go.dsd.app;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import th.go.dsd.util.AppRunner;
-import th.go.dsd.util.Calc;
-import th.go.dsd.util.CallParam;
-import th.go.dsd.util.CallResponse;
-import th.go.dsd.util.Car;
-import th.go.dsd.util.Echo;
-import th.go.dsd.util.MyInput;
-import th.go.dsd.util.Truck;
-
-public class Application {
-
-    public static void main(String[] args) {
-        CallParam cmd1 = new CallParam(args);
-        Map<String, AppRunner> feature = new HashMap<>();
-        feature.put("calc", new Calc());
-        feature.put("echo", new Echo());
-        feature.put("car", new Car());
-        feature.put("truck", new Truck());
-        feature.put("myinput", new MyInput());
-
-        if(feature.containsKey(cmd1.getCommand())){
-            AppRunner cmd = feature.get(cmd1.getCommand());
-            CallResponse resp = cmd.runCommand(cmd1);
-            System.out.println(resp.getValue());
-        }else{
-            System.out.println("Not support this command " + cmd1.getCommand());
-        }
-    }
-}
-```
-</details>
 
 ---
